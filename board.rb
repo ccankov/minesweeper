@@ -75,7 +75,8 @@ class Board
   end
 
   def flag(pos)
-
+    r, c = pos
+    @grid[r][c].toggle_flag
   end
 
   def render
