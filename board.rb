@@ -74,10 +74,30 @@ class Board
 
   end
 
+  def flag(pos)
+
+  end
+
   def render
     @grid.each do |row|
       puts row.map(&:to_s).join(" ")
     end
+  end
+
+  def game_over?
+    @grid.each do |row|
+      row.each do |tile|
+        return false if !tile.is_bomb && !tile.is_revealed
+      end
+    end
+    true
+  end
+
+  private
+
+  def valid_pos?(pos)
+    r, c = pos
+    r.between?(0, @grid.length - 1) && c.between?(0, @grid[0].length - 1)
   end
 
   def get_neighbors(pos)
@@ -88,20 +108,6 @@ class Board
       neighbor_pos << current_pos if valid_pos?(current_pos)
     end
     neighbor_pos
-  end
-
-  def valid_pos?(pos)
-    r, c = pos
-    r.between?(0, @grid.length - 1) && c.between?(0, @grid[0].length - 1)
-  end
-
-  def game_over?
-    @grid.each do |row|
-      row.each do |tile|
-        return false if !tile.is_bomb && !tile.is_revealed
-      end
-    end
-    true
   end
 
 end
