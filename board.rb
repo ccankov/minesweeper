@@ -85,13 +85,16 @@ class Board
     end
   end
 
+  def won?
+    @grid.flatten.all? { |tile| tile.is_revealed ^ tile.is_bomb }
+  end
+
+  def lost?
+    @grid.flatten.any? { |tile| tile.is_revealed && tile.is_bomb }
+  end
+
   def game_over?
-    @grid.each do |row|
-      row.each do |tile|
-        return false if !tile.is_bomb && !tile.is_revealed
-      end
-    end
-    true
+    won? || lost?
   end
 
   private
