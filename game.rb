@@ -31,8 +31,18 @@ class Game
   def prompt
     puts "Please indicate your move. (f)lag/(r)eveal"
     type = gets.chomp
+    until "fFrR".include?(type)
+      puts "Invalid move, please enter a new move."
+      type = gets.chomp
+    end
+
     puts "Please indicate the tile position. eg: 0,0"
     pos = gets.chomp.split(',').map(&:to_i)
+    until @board.valid_pos?(pos)
+      puts "Invalid position, please enter a new position."
+      pos = gets.chomp.split(',').map(&:to_i)
+    end
+    
     [type, pos]
   end
 

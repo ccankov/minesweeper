@@ -97,12 +97,13 @@ class Board
     won? || lost?
   end
 
-  private
-
   def valid_pos?(pos)
     r, c = pos
+    return false unless r.is_a?(Integer) && c.is_a?(Integer)
     r.between?(0, @grid.length - 1) && c.between?(0, @grid[0].length - 1)
   end
+
+  private
 
   def get_neighbors(pos)
     r, c = pos
