@@ -1,3 +1,5 @@
+require_relative 'board'
+
 class Game
 
   def initialize
@@ -18,16 +20,33 @@ class Game
   end
 
   def make_guess(move)
-
+    type, pos = move
+    if "fF".include?(type)
+      @board.flag(pos)
+    else
+      @board.reveal(pos)
+    end
   end
 
   def prompt
+    puts "Please indicate your move. (f)lag/(r)eveal"
+    type = gets.chomp
+    puts "Please indicate the tile position. eg: 0,0"
+    pos = gets.chomp.split(',').map(&:to_i)
+    [type, pos]
   end
 
   def game_over?
+    @board.game_over?
   end
 
   def end_game
+    @board.render
+    if @board.won?
+      puts "Congratulations, you win!"
+    else
+      puts "BOOM! You lose :("
+    end
   end
 
 end

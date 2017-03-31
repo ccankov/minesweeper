@@ -10,7 +10,7 @@ class Tile
   end
 
   def reveal
-    @is_revealed = true
+    @is_revealed = true unless @is_flagged
   end
 
   def to_s
