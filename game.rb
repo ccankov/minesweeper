@@ -2,8 +2,8 @@ require_relative 'board'
 
 class Game
 
-  def initialize
-    @board = Board.random_board
+  def initialize(board = Board.random_board)
+    @board = board
     puts "Welcome to Minesweeper!"
   end
 
@@ -42,7 +42,7 @@ class Game
       puts "Invalid position, please enter a new position."
       pos = gets.chomp.split(',').map(&:to_i)
     end
-    
+
     [type, pos]
   end
 
