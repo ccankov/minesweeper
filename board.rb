@@ -18,7 +18,7 @@ class Board
   def self.generate_bomb_pos(grid)
     locations = []
     num_tiles = grid.length * grid[0].length
-    num_bombs = num_tiles / 4
+    num_bombs = num_tiles / 5
 
     until locations.length == num_bombs
       location = [rand(0...grid.length), rand(0...grid[0].length)]
